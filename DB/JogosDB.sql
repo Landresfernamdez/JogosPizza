@@ -110,7 +110,6 @@ $BODY$
 language plpgsql;
 
 create or replace function insertarCliente(
-
 	nombre_usuario varchar(50),
 	nombre varchar(50),
 	apellido1 varchar(50),
@@ -125,9 +124,46 @@ create or replace function insertarCliente(
 RETURNS VOID as
 $BODY$
 BEGIN
-	
-	insert into clientes values (nombre_usuario, nombre, apellido1,apellido2, distrito, canton, provincia, detalle, contrasena);
+	INSERT INTO clientes VALUES (nombre_usuario, nombre, apellido1,apellido2, distrito, canton, provincia, detalle, contrasena);
+	INSERT INTO comprador(nombre_usuario) VALUES(nombre_usuario);
 
 END
 $BODY$
 language plpgsql;
+
+create or replace function insertarAdministrador(
+	nombre_usuario varchar(50),
+	nombre varchar(50),
+	apellido1 varchar(50),
+	apellido2 varchar(50),
+	distrito varchar(50),
+	canton varchar(50),
+	provincia varchar(50),
+	detalle varchar(50),
+	contrasena varchar(50),
+	puesto varchar(50)
+	)
+RETURNS VOID as
+$BODY$
+BEGIN
+	INSERT INTO clientes VALUES (nombre_usuario,nombre,apellido1,apellido2, distrito, canton, provincia, detalle, contrasena);
+	INSERT INTO administrador(nombre_usuario,puesto) VALUES(nombre_usuario,puesto);
+
+END
+$BODY$
+language plpgsql;
+---Pruebas
+
+select insertarCliente('landresf12','Andres','Fernandez','Calderon','Piedades Sur','San Ramon','Alajuela','Residencias TEC San Carlos','12345');
+SELECT * FROM Comprador
+
+SELECT insertarAdministrador('yerlin96','Yerlin','Ramirez','Chavarria','Santiago','San Ramon','Alajuela','Balboa','12345','Gerente');
+
+
+SELECT * FROM Administrador
+
+SELECT count(*) as counta FROM administrador as a inner join clientes as c on a.nombre_usuario='yerlin96' and c.contrasena='12345'
+SELECT count(*) as counta FROM comprador as a inner join clientes as c on a.nombre_usuario='landresf12' and c.contrasena='12345'
+
+
+
