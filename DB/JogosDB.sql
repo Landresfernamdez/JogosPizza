@@ -152,7 +152,29 @@ BEGIN
 END
 $BODY$
 language plpgsql;
+
+CREATE OR REPLACE FUNCTION insertarPedido(
+	nombre_usuario VARCHAR(50),
+	estado CHAR(1),
+	fecha DATE
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	INSERT INTO pedido(nombre_usuario,estado,fecha)VALUES(nombre_usuario,estado,fecha);
+
+END
+$BODY$
+language plpgsql;
+
 ---Pruebas
+
+SELECT insertarPedido('landresf12','n','22-11-2017 00:00:00')
+
+SELECT * FROM pedido where estado='n'
+
+
+
 
 select insertarCliente('landresf12','Andres','Fernandez','Calderon','Piedades Sur','San Ramon','Alajuela','Residencias TEC San Carlos','12345');
 SELECT * FROM Comprador
@@ -162,8 +184,10 @@ SELECT insertarAdministrador('yerlin96','Yerlin','Ramirez','Chavarria','Santiago
 
 SELECT * FROM Administrador
 
-SELECT count(*) as counta FROM administrador as a inner join clientes as c on a.nombre_usuario='yerlin96' and c.contrasena='12345'
-SELECT count(*) as counta FROM comprador as a inner join clientes as c on a.nombre_usuario='landresf12' and c.contrasena='12345'
+
+
+SELECT count(*) as counta FROM administrador as a inner join clientes as c on a.nombre_usuario='yerlin9' and c.contrasena='12345'
+SELECT count(*) as counta FROM comprador as a inner join clientes as c on a.nombre_usuario='landresf1' and c.contrasena='12345'
 
 
 

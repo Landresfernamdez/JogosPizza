@@ -2,9 +2,9 @@ angular.module('userModule',['ngRoute'])
 .config(['$routeProvider',function($routeProvider)
     {
         $routeProvider
-                    .when("/comprador",{
-                    	templateUrl:'comprador/comprador.html',
-                        controller: 'compradorController'
+                    .when("/pedidos",{
+                        templateUrl:'pedidos/pedidos.html',
+                        controller: 'pedidosController'
                     })
 			        .otherwise({
 			            redirectTo: '/'

@@ -1,0 +1,30 @@
+<section class="content" ng-controller="pedidosController">
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="pedido in listaPedidos">
+                <div class="card" >
+                    <div class="padreparalelos">
+                        <div  ng-click="">
+                            <h2 >
+                               Usuario:{{pedido.nombre_usuario}} </small>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="body">
+                        <div style="float: left;display: inline-block">
+                            {{pedido.fecha}}
+                            <br>
+                            <button ng-click="VerDetalles(pedido.id_pedido)">Ver detalles</button>
+                            <button>Aceptar pedido</button>
+                            <button>Rechazar pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Task Info -->
+            <!-- Browser Usage -->
+        </div>
+    </div>
+</section>
+
+

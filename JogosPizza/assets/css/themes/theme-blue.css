@@ -1,17 +1,16 @@
 ﻿.theme-blue .navbar {
-  background-color: #140e39; }
+  background-color: black;; }
 .tecBlue{
-  color: #140e39;
+  color: black;
 }
 .whiteText{
   color: #fff;
 }
 .bagTecBlue{
-  background-color: #140e39;
-
+  background-color: black;;
 }
 .tecTitles {
-  color :#c1272d; }
+  color :black;; }
 
 .theme-blue .navbar-brand {
   color: #fff; }
@@ -42,7 +41,7 @@
 .theme-blue .sidebar .menu .list li.active {
   background-color: transparent; }
   .theme-blue .sidebar .menu .list li.active > :first-child i, .theme-blue .sidebar .menu .list li.active > :first-child span {
-    color: #140e39; }
+    color: #c1272d; }
 
 .theme-blue .sidebar .menu .list .toggled {
   background-color: transparent; }
@@ -53,5 +52,5 @@
 .theme-blue .sidebar .legal {
   background-color: #fff; }
   .theme-blue .sidebar .legal .copyright a {
-    color: #140e39 !important; }
+    color: #c1272d !important; }
 
