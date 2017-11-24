@@ -5,6 +5,9 @@ angular.module('userModule',['ngRoute'])
                     .when("/pedidos",{
                         templateUrl:'pedidos/pedidos.html',
                         controller: 'pedidosController'
+                    }).when("/productos",{
+                        templateUrl:'productos/productos.html',
+                        controller: 'productosController'
                     })
 			        .otherwise({
 			            redirectTo: '/'
