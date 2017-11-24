@@ -66,8 +66,7 @@ CREATE  TABLE AP (
 	CONSTRAINT FK_id_pedido_pedido_administrador FOREIGN KEY  (id_pedido) REFERENCES pedido (id_pedido),
 	CONSTRAINT FK_nombre_usuario_administrador_pedido FOREIGN KEY  (nombre_usuario) REFERENCES administrador (nombre_usuario)
 );	
-
-----tabla entre pedidp y producto
+----tabla entre pedido y producto
 CREATE  TABLE PP (
 	nombre_producto VARCHAR(50) NOT NULL,
 	id_pedido SERIAL NOT NULL,
@@ -75,40 +74,23 @@ CREATE  TABLE PP (
 	CONSTRAINT FK_nombre_producto_producto_pedido FOREIGN KEY  (nombre_producto) REFERENCES productos (nombre_producto),
 	CONSTRAINT FK_id_pedido_pedido_producto FOREIGN KEY  (id_pedido) REFERENCES pedido (id_pedido)
 );
-
-	
-create or replace function agregarProducto(
-	nombre_pedido varchar(50),
-	precio money,
-	estado int
-)
-
-RETURNS VOID as
-$BODY$
-BEGIN
-	
-	insert into producto values(nombre_pedido,precio,estado);	
-
-END
-$BODY$
-language plpgsql;
-
-		
+CREATE TABLE notificacion(
+	id_pedido INT Primary Key NOT NULL,
+	detalle VARCHAR(200),
+	vista CHAR(1),
+	CONSTRAINT FK_id_pedido_pedido_notificacion FOREIGN KEY  (id_pedido) REFERENCES pedido(id_pedido)
+);
 create or replace function consultarProducto(
-
 	nombre_pedido varchar(50)
 )
-
 RETURNS VOID as
 $BODY$
 BEGIN
-	
 	SELECT * productos;
 
 END
 $BODY$
 language plpgsql;
-
 create or replace function insertarCliente(
 	nombre_usuario varchar(50),
 	nombre varchar(50),
@@ -120,7 +102,6 @@ create or replace function insertarCliente(
 	detalle varchar(50),
 	contrasena varchar(50)
 	)
-
 RETURNS VOID as
 $BODY$
 BEGIN
@@ -130,7 +111,6 @@ BEGIN
 END
 $BODY$
 language plpgsql;
-
 create or replace function insertarAdministrador(
 	nombre_usuario varchar(50),
 	nombre varchar(50),
@@ -167,27 +147,121 @@ END
 $BODY$
 language plpgsql;
 
+CREATE OR REPLACE FUNCTION agregarProducto(
+	nombre_pedido VARCHAR(50),
+	precio money,
+	estado CHAR(1),
+	nombre_catego VARCHAR(50)
+)
+RETURNS VOID as
+$BODY$
+BEGIN
+	IF (NOT EXISTS(SELECT * FROM categorias where nombre_categoria=nombre_catego))
+	THEN
+		INSERT INTO categorias VALUES(nombre_catego);
+		INSERT INTO productos VALUES(nombre_pedido,precio,CAST(estado AS INT),nombre_catego);
+	ELSE 
+		INSERT INTO productos VALUES(nombre_pedido,precio,CAST(estado AS INT),nombre_catego);
+		
+	END IF;
+END;
+$BODY$
+language plpgsql;
+CREATE OR REPLACE FUNCTION modificarPedidoR(
+	id_p VARCHAR(10),
+	estado_p CHAR(1),
+	detalle_p VARCHAR(50)
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	UPDATE pedido SET estado=estado_p where id_pedido=CAST(id_p AS INT);
+	INSERT INTO notificacion VALUES(CAST(id_p AS INT),detalle_p,0);
+END
+$BODY$
+language plpgsql;
+
+CREATE OR REPLACE FUNCTION modificarPedido(
+	id_p VARCHAR(10),
+	estado_p CHAR(1)
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	UPDATE pedido SET estado=estado_p where id_pedido=CAST(id_p AS INT);
+END
+$BODY$
+language plpgsql;
+
+
+SELECT * FROM Pedido
+SELECT * FROM notificacion
+SELECT modificarPedidoR('2','n','Disculpe pero no tenemos ingredientes');
+SELECT modificarPedido('2','n');
+CREATE OR REPLACE FUNCTION agregarProducto(
+	nombre_pedido VARCHAR(50),
+	precio money,
+	estado CHAR(1),
+	nombre_catego VARCHAR(50)
+)
+RETURNS VOID as
+$BODY$
+BEGIN
+	IF (NOT EXISTS(SELECT * FROM categorias where nombre_categoria=nombre_catego))
+	THEN
+		INSERT INTO categorias VALUES(nombre_catego);
+		INSERT INTO productos VALUES(nombre_pedido,precio,CAST(estado AS INT),nombre_catego);
+	ELSE 
+		INSERT INTO productos VALUES(nombre_pedido,precio,CAST(estado AS INT),nombre_catego);
+		
+	END IF;
+END;
+$BODY$
+language plpgsql;
+
+
 ---Pruebas
 
+SELECT agregarProducto('Pizza Hawaiana mediana','5000',1,'Pizzas medianas');
+SELECT agregarProducto('Pizza peperoni mediana','5000','1','Pizzas medianas');
+SELECT agregarProducto('Pizza suprema mediana','5000','1','Pizzas medianas');
+
+SELECT agregarProducto('Pizza Hawaiana pequeña','3500','1','Pizzas pequeñas');
+SELECT agregarProducto('Pizza peperoni pequeña','3500','1','Pizzas pequeñas');
+SELECT agregarProducto('Pizza suprema pequeña','3500','1','Pizzas pequeñas');
+
+SELECT agregarProducto('Pizza Hawaiana grande','7500','1','Pizzas grandes');
+SELECT agregarProducto('Pizza peperoni grande','7500','1','Pizzas grandes');
+SELECT agregarProducto('Pizza suprema grande','7500','1','Pizzas grandes');
+
+SELECT * FROM categorias
+SELECT * FROM productos
+
+--Simulacion de un pedido
+
+SELECT insertarPedido('landresf12','n','23-11-2017 00:00:00')
+INSERT INTO PP VALUES('Pizza suprema grande','1','3');
+INSERT INTO PP VALUES('Pizza suprema mediana','1','3');
+
+INSERT INTO PP VALUES('Pizza peperoni grande','2','3');
+INSERT INTO PP VALUES('Pizza suprema mediana','2','3');
+
+SELECT pp.nombre_producto,pp.cantidad,pp.cantidad*p.precio  AS total,p.nombre_categoria FROM PP as pp inner join productos as p on pp.id_pedido='1' and p.nombre_producto=pp.nombre_producto  
+
+
+SELECT * FROM PP
+SELECT * FROM pedido
+
+
+
+
 SELECT insertarPedido('landresf12','n','22-11-2017 00:00:00')
-
 SELECT * FROM pedido where estado='n'
-
-
-
-
 select insertarCliente('landresf12','Andres','Fernandez','Calderon','Piedades Sur','San Ramon','Alajuela','Residencias TEC San Carlos','12345');
 SELECT * FROM Comprador
-
 SELECT insertarAdministrador('yerlin96','Yerlin','Ramirez','Chavarria','Santiago','San Ramon','Alajuela','Balboa','12345','Gerente');
-
-
 SELECT * FROM Administrador
-
-
-
 SELECT count(*) as counta FROM administrador as a inner join clientes as c on a.nombre_usuario='yerlin9' and c.contrasena='12345'
 SELECT count(*) as counta FROM comprador as a inner join clientes as c on a.nombre_usuario='landresf1' and c.contrasena='12345'
-
 
 
