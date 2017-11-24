@@ -1,7 +1,5 @@
 
-
 <a class="btn-floating btn-sm " data-toggle="modal" data-target="#add"><i class="material-icons" style="cursor:pointer">add</i></a>
-
 <select id="s_categoria">
     <option ng-repeat="categoria in listaCategorias" value="volvo">
         {{categoria.nombre_categoria}}
@@ -16,8 +14,9 @@
                     <th id="name">Nombre</th>
                     <th id="price">Precio</th>
                     <th id="state">Estado</th>
-                    <th id="modificar">Modificar</th>
-                    <th id="eliminar">Eliminar</th>
+                    <th id="cstate">Cambiar estado</th>
+                    <th id="modificar">Eliminar</th>
+                    <th id="eliminar">Modificar</th>
                     </thead>
                     <tbody>
                     <tr ng-repeat="producto in listaProductos">
@@ -25,86 +24,16 @@
                         <td>{{producto.precio}}</td>
                         <td>{{producto.estado}}</td>
                         <td><p data-placement="top" data-toggle="tooltip" title="Edit">
-                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ng-click="actualizarActividad(activity)"><span class="glyphicon glyphicon-pencil"ng-click="actualizarActividad(activity)"></span></button></p></td>
+                            <button class="btn btn-primary btn-xs"  ng-click="postProducto(producto)"><span class="glyphicon glyphicon-off"ng-click="postProducto(producto)"></span></button></p></td>
                         <td><p data-placement="top" data-toggle="tooltip" title="Delete">
-                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"ng-click="actualizarActividadofEvent(activity)" ><span class="glyphicon glyphicon-trash"ng-click="actualizarActividadofEvent(activity)"></span></button></p></td>
+                            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete"ng-click="actualizarProducto(producto)" ><span class="glyphicon glyphicon-trash"ng-click="actualizarProducto(producto)"></span></button></p></td>
+                        <td><p data-placement="top" data-toggle="tooltip" title="Edit">
+                            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" ng-click="actualizarProducto(producto)"><span class="glyphicon glyphicon-pencil"ng-click="actualizarProducto(producto)"></span></button></p></td>
                     </tr>
                     </tbody>
-
                 </table>
 
             </div>
-        </div>
-    </div>
-    <!--Vista de editar-->
-    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                    <h4 class="modal-title custom_align" id="Heading">Edit Acvivity</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-responsive table-advance table-hover">
-                        <tbody>
-                        <tr>
-                            <td>
-
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="activity.nombre" ng-model="activity.nombre">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="date" placeholder="activity.fecha"ng-model="activity.fecha">
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="activity.lugar"ng-model="activity.lugar">
-                                </div>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="activity.cupo"ng-model="activity.cupo">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="activity.horaInicio"ng-model="activity.horaInicio">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="activity.horaFinal"ng-model="activity.horaFinal">
-                                </div>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="activity.descripcion"ng-model="activity.descripcion">
-                                </div>
-                            </td>
-
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="modal-footer ">
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" ng-click="putActivities(activity)"data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-ok-sign"  ng-click="putActivities(activity)"data-dismiss="modal" aria-hidden="true"></span>Actualizar</button>
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
         </div>
     </div>
     <!--Vista de a�adir-->
@@ -121,58 +50,63 @@
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="Descripcion"ng-model="activityofevent.descripcion">
+                                    <input class="form-control " type="text" placeholder="Nombre del producto"ng-model="producto.nombre_producto">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="Nombre" ng-model="activityofevent.nombre">
+                                    <input class="form-control " type="text" placeholder="Precio" ng-model="producto.precio">
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
-
                                 <div class="form-group">
-                                    <input class="form-control " type="date" placeholder="fecha"ng-model="activityofevent.fecha">
+                                    <input class="form-control " type="text" placeholder="Nombre de categoria"ng-model="producto.nombre_categoria">
                                 </div>
 
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="cupo"ng-model="activityofevent.cupo">
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="lugar"ng-model="activityofevent.lugar">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="datetime" placeholder="Hora de inicio"ng-model="activityofevent.horaInicio">
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="datetime" placeholder="Hora de final"ng-model="activityofevent.horaFinal">
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="form-group">
-                                    <input class="form-control " type="text" placeholder="duracion"ng-model="activityofevent.duracion">
-                                </div>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <div class="modal-footer " >
-                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-ok-sign" ng-click="postActivities(activityofevent)" data-dismiss="modal" aria-hidden="true"></span>add</button>
+                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-ok-sign" ng-click="putProducto(producto)" data-dismiss="modal" aria-hidden="true"></span>Agregar producto</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+
+    <!--Vista de modificar-->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Headin">Modificar el producto</h4>
+                </div>
+                <div class="modal-body" >
+                    <table class="table table-responsive table-advance table-hover">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <input class="form-control " type="text" placeholder="producto.precio" ng-model="producto.precio">
+                                </div>
+                            </td>
+                            <td>
+                                <select id="s_cate_m">
+                                    <option ng-repeat="categoria in listaCategorias" value="{{categoria.nombre_categoria}}">
+                                        {{categoria.nombre_categoria}}
+                                    </option>
+                                </select>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer " >
+                        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;"data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-ok-sign" ng-click="modificarProducto(producto)" data-dismiss="modal" aria-hidden="true"></span>Modificar</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -190,11 +124,11 @@
                 </div>
                 <div class="modal-body">
 
-                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Estas seguro que deseas eliminar la actividad?</div>
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Estas seguro que deseas eliminar el producto?</div>
 
                 </div>
                 <div class="modal-footer ">
-                    <button type="button" class="btn btn-primary"  data-dismiss="modal"ng-click="delete(act_event)"><span  ng-click="delete(act_event)"class="glyphicon glyphicon-ok-sign"data-dismiss="modal"></span>Si</button>
+                    <button type="button" class="btn btn-primary"  data-dismiss="modal"ng-click="deleteProducto(producto)"><span  ng-click="deleteProducto(producto)"class="glyphicon glyphicon-ok-sign"data-dismiss="modal"></span>Si</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"data-dismiss="modal"></span>No</button>
                 </div>
             </div>

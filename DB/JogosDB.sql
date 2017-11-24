@@ -148,9 +148,8 @@ $BODY$
 language plpgsql;
 
 CREATE OR REPLACE FUNCTION agregarProducto(
-	nombre_pedido VARCHAR(50),
+	nombre_producto VARCHAR(50),
 	precio money,
-	estado CHAR(1),
 	nombre_catego VARCHAR(50)
 )
 RETURNS VOID as
@@ -159,14 +158,56 @@ BEGIN
 	IF (NOT EXISTS(SELECT * FROM categorias where nombre_categoria=nombre_catego))
 	THEN
 		INSERT INTO categorias VALUES(nombre_catego);
-		INSERT INTO productos VALUES(nombre_pedido,precio,CAST(estado AS INT),nombre_catego);
+		INSERT INTO productos VALUES(nombre_producto,precio,1,nombre_catego);
 	ELSE 
-		INSERT INTO productos VALUES(nombre_pedido,precio,CAST(estado AS INT),nombre_catego);
+		INSERT INTO productos VALUES(nombre_producto,precio,1,nombre_catego);
 		
 	END IF;
 END;
 $BODY$
 language plpgsql;
+
+CREATE OR REPLACE FUNCTION modificarProducto(
+	nombre_producto_p VARCHAR(50),
+	estado_p CHAR(1)
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	UPDATE productos SET estado=CAST(estado_p AS INT) where nombre_producto=nombre_producto_p;
+END
+$BODY$
+language plpgsql;
+
+CREATE OR REPLACE FUNCTION modificarProductoAll(
+	nombre_producto_p VARCHAR(50),
+	precio_p money,
+	nombre_categoria_p VARCHAR(50)
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	UPDATE productos SET precio=precio_p,nombre_categoria=nombre_categoria_p where nombre_producto=nombre_producto_p;
+END
+$BODY$
+language plpgsql;
+
+
+SELECT modificarProducto('')
+SELECT * FROM productos
+
+CREATE OR REPLACE FUNCTION eliminarProducto(
+	nombre_producto_p VARCHAR(50)
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	DELETE FROM productos where nombre_producto=nombre_producto_p;
+END
+$BODY$
+language plpgsql;
+
+
 CREATE OR REPLACE FUNCTION modificarPedidoR(
 	id_p VARCHAR(10),
 	estado_p CHAR(1),
@@ -180,6 +221,19 @@ BEGIN
 END
 $BODY$
 language plpgsql;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE OR REPLACE FUNCTION modificarPedido(
 	id_p VARCHAR(10),
