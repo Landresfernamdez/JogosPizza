@@ -24,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="productos.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="productos.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/components/administrador/productos/productos.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="106" column="28" lean-forward="true" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
+            <state relative-caret-position="308">
+              <caret line="97" column="52" lean-forward="false" selection-start-line="97" selection-start-column="44" selection-end-line="97" selection-end-column="52" />
               <folding>
                 <element signature="n#style#0;n#i#0;n#a#0;n#!!top" expanded="true" />
               </folding>
@@ -36,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="productosController.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="productosController.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/components/administrador/productos/productosController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="54" column="62" lean-forward="true" selection-start-line="54" selection-start-column="62" selection-end-line="54" selection-end-column="62" />
+            <state relative-caret-position="272">
+              <caret line="46" column="54" lean-forward="true" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -179,8 +179,8 @@
         <option value="$PROJECT_DIR$/app/components/administrador/administrador.html" />
         <option value="$PROJECT_DIR$/app/components/administrador/productos/productosServices.js" />
         <option value="$PROJECT_DIR$/server/productos/CRUDproductos.php" />
-        <option value="$PROJECT_DIR$/app/components/administrador/productos/productosController.js" />
         <option value="$PROJECT_DIR$/app/components/administrador/productos/productos.html" />
+        <option value="$PROJECT_DIR$/app/components/administrador/productos/productosController.js" />
       </list>
     </option>
   </component>
@@ -554,12 +554,12 @@
       <workItem from="1511239176600" duration="9366000" />
       <workItem from="1511325834562" duration="6620000" />
       <workItem from="1511471838435" duration="21753000" />
-      <workItem from="1511535715778" duration="14676000" />
+      <workItem from="1511535715778" duration="15166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236322000" />
+    <option name="totallyTimeSpent" value="236812000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -848,14 +848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/components/administrador/productos/productosController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="54" column="62" lean-forward="true" selection-start-line="54" selection-start-column="62" selection-end-line="54" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/components/administrador/administrador.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1377">
@@ -868,11 +860,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/components/administrador/productos/productos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="106" column="28" lean-forward="true" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
+        <state relative-caret-position="308">
+          <caret line="97" column="52" lean-forward="false" selection-start-line="97" selection-start-column="44" selection-end-line="97" selection-end-column="52" />
           <folding>
             <element signature="n#style#0;n#i#0;n#a#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/components/administrador/productos/productosController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="46" column="54" lean-forward="true" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -44,14 +44,14 @@ angular.module('userModule')
             }
         });
     };
-    var select1 = document.getElementById('s_categoria');
+    var select1 = document.getElementById('s_cate_m');
     var selectedOption1;
     select1.addEventListener('change',
         function(){
             selectedOption1 = this.options[select1.selectedIndex];
-            $scope.getProductos();
         });
     $scope.modificarProducto = function modificarProducto(producto){
+        alert(selectedOption1.text);
         $scope.producto.nombre_categoria=selectedOption1.text;
         OperationsProductos.modificarProductos($scope.producto, function(response) {
             if (response.success){
