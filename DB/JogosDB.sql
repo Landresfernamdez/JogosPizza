@@ -278,6 +278,38 @@ END
 $BODY$
 language plpgsql;
 
+CREATE OR REPLACE FUNCTION modificarDatosCl(
+
+	nombreu VARCHAR(50),
+	nom VARCHAR(50),
+	ap1 VARCHAR(50),
+	ap2 VARCHAR(50),
+	dist VARCHAR(50),
+	cant VARCHAR(50),
+	prov VARCHAR(50),
+	det VARCHAR(50),
+	contr VARCHAR(50)	
+)
+
+RETURNS VOID AS
+$$
+BEGIN
+	UPDATE clientes SET
+	nombre = nom,
+	apellido1 = ap1,
+	apellido2 = ap2,
+	distrito = dist,
+	canton = cant,
+	provincia = prov,
+	detalle = det,
+	contrasena = contr WHERE nombre_usuario = nombreu;
+	
+	
+END
+$$
+LANGUAGE PLPGSQL;
+
+
 SELECT * FROM productos
 SELECT insertarProductoapedido('Pizza suprema grande','1','3')
 SELECT * FROM PP

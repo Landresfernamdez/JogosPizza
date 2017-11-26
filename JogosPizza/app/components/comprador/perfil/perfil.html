@@ -1,0 +1,71 @@
+<div class="container-fluid">
+
+    <div class="modal-body">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="form-login" data-ng-init="obtenerUsuario()">
+                <h4 style="text-align: center">Datos perfil</h4>
+                <div ng-repeat="usuario in listaUsuario">
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="name_c">Nombre</label>
+                                <input type="text" id="name_c" class="form-control input-sm chat-input"
+                                       ng-model="usuario.nombre"/>
+                            </td>
+                            <td>
+                                <label for="apellido1_c">Primer apellido</label>
+                                <input type="text" id="apellido1_c" class="form-control input-sm chat-input"
+                                       ng-model="usuario.apellido1"/>
+                            </td>
+                            <td>
+                                <label for="apellido2_c">Segundo apellido</label>
+                                <input type="text" id="apellido2_c" class="form-control input-sm chat-input"
+                                       ng-model="usuario.apellido2"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="distrito">Distrito</label>
+                                <input type="text" id="distrito" class="form-control input-sm chat-input"
+                                       ng-model="usuario.distrito"/>
+                            </td>
+                            <td>
+                                <label for="canton">Canton</label>
+                                <input type="text" id="canton" class="form-control input-sm chat-input"
+                                       ng-model="usuario.canton"/>
+                            </td>
+                            <td>
+                                <label for="provincia">Provincia</label>
+                                <input type="text" id="provincia" class="form-control input-sm chat-input"
+                                       ng-model="usuario.provincia"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="detalle">Detalle</label>
+                                <input type="text" id="detalle" class="form-control input-sm chat-input"
+                                       ng-model="usuario.detalle"/>
+                            </td>
+                            <td>
+                                <label for="edad">Contraseña</label>
+                                <input type="text" id="edad" class="form-control input-sm chat-input"
+                                       ng-model="usuario.contrasena"/>
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div class="modal-footer">
+                        <span class="group-btn"><br>
+                            <a class="btn btn-primary btn-md" data-toggle="modal" ng-click="modificarUsuario(usuario)">Actualizar <i
+                                    class="fa fa-check-circle-o"></i></a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

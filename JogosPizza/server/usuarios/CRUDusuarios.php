@@ -80,4 +80,44 @@ function putUsuarios(){
     }
     echo json_encode($response, JSON_FORCE_OBJECT);
 }
+
+function getDataUser(){
+    include("../conexion.php");
+    $obj = json_decode(file_get_contents("php://input"));
+    //se declara el query
+    $query="SELECT * FROM clientes WHERE nombre_usuario='$obj->nombre_usuario'";
+    //pg_query se encarga de ejecutar el query mediante la conexion y el query y  se encarga de realizar la consulta a la base y generar una tabla
+    $result=pg_query($con,$query)or die("Error de consulta");
+    //se cierra la conexion ya que los datos se guardaron en la variable $result
+    pg_close($con);
+    //pg_fetch_all se encarga de retornar un array con filas y columnas de la tabla que se creo con el query
+    $respuesta=pg_fetch_all($result);
+    // json_encode se encarga de convertir el array en un json(java script object notation)
+    echo json_encode($respuesta);
+}
+function modificarDatos(){
+    //se importa la conexion con la base de datos
+    include("../conexion.php");
+    //decodifica un string a json
+    $obj = json_decode(file_get_contents("php://input"));
+    //query de la consulta a la base de datos
+    $query = "SELECT modificarDatosCl('$obj->nombre_usuario','$obj->nombre','$obj->apellido1','$obj->apellido2','$obj->distrito','$obj->canton','$obj->provincia','$obj->detalle','$obj->contrasena');";
+    //pg_query se encarga de ejecutar el query mediante la conexion y el query y  se encarga de realizar la consulta a la base y generar una tabla
+    $result = pg_query($con,$query);
+
+    $response = array();
+    if (!$result){
+        $response = array(
+            'status' => false,
+            'message' => 'An error occured...',
+            'data' => pg_fetch_all($result)
+        );
+    }else{
+        $response = array(
+            'status' => true,
+            'message' => 'Success'
+        );
+    }
+    echo json_encode($response, JSON_FORCE_OBJECT);
+}
 ?>

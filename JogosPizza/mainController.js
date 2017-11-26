@@ -17,6 +17,7 @@ angular.module('userModule')
         nombre_usuario:"",
         contrasena:""
     }
+
     $scope.validaUsuario=function(datos_usuario){
         $http({
             method  :'POST',
@@ -25,12 +26,14 @@ angular.module('userModule')
         })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
             .then(function mySuccess(response) {
                 if(response.data.success){
+                    sessionStorage.setItem("nombre_usuario",datos_usuario.nombre_usuario);
+
                     if(response.data.tipo=='a'){
-                        sessionStorage.setItem("nombre_usuario",datos_usuario.nombre_usuario)
+
                         window.location.href = ('app/components/administrador/administrador.html');
                     }
                     else if(response.data.tipo=='c'){
-                        sessionStorage.setItem("nombre_usuario",datos_usuario.nombre_usuario)
+
                         window.location.href = ('app/components/comprador/comprador.html');
                     }
                     else{
@@ -46,6 +49,7 @@ angular.module('userModule')
                 mostrarNotificacion("Revise su conexion a Internet",1);
             });
      }
+
      $scope.registrarUsuario=function(usuario){
         console.log(usuario);
          $http({

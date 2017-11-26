@@ -44,7 +44,8 @@ angular.module('userModule')
         console.log(producto);
         OperationsProductos.updateProductos(producto, function(response) {
             if (response.success){
-                location.reload();
+                //$location.path('productos');
+                //location.reload();
             }
         });
     };
@@ -56,8 +57,7 @@ angular.module('userModule')
             localStorage.setItem("categoria",selectedOption1.text);
         });
     $scope.modificarProducto = function modificarProducto(producto){
-        alert(selectedOption1.text);
-        $scope.producto.nombre_categoria=selectedOption1.text;
+        $scope.producto.nombre_categoria=localStorage.getItem("categoria");
         OperationsProductos.modificarProductos($scope.producto, function(response) {
             if (response.success){
             }
