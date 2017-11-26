@@ -1,7 +1,7 @@
 'use strict'
 angular.module('userModule')
 .controller('mainController',function($scope,$location,$route,$http){
-    var urlp="http://localhost:8080/JogosPizza/server/usuarios/CRUDusuarios.php?Funcion=";
+    var urlp="http://172.24.47.10:8080/JogosPizza/server/usuarios/CRUDusuarios.php?Funcion=";
     $scope.usuario={
         nombre:"",
         apellido1:"",
@@ -17,6 +17,7 @@ angular.module('userModule')
         nombre_usuario:"",
         contrasena:""
     }
+
     $scope.validaUsuario=function(datos_usuario){
         $http({
             method  :'POST',
@@ -25,10 +26,14 @@ angular.module('userModule')
         })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
             .then(function mySuccess(response) {
                 if(response.data.success){
+                    sessionStorage.setItem("nombre_usuario",datos_usuario.nombre_usuario);
+
                     if(response.data.tipo=='a'){
+
                         window.location.href = ('app/components/administrador/administrador.html');
                     }
                     else if(response.data.tipo=='c'){
+
                         window.location.href = ('app/components/comprador/comprador.html');
                     }
                     else{
@@ -44,6 +49,7 @@ angular.module('userModule')
                 mostrarNotificacion("Revise su conexion a Internet",1);
             });
      }
+
      $scope.registrarUsuario=function(usuario){
         console.log(usuario);
          $http({

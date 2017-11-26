@@ -1,0 +1,72 @@
+<div>
+    <select id="c_categoria">
+        <option ng-repeat="categoria in listaCategorias">
+            {{categoria.nombre_categoria}}
+        </option>
+    </select>
+    <button ng-click="realizarPedido()">Realizar pedido</button>
+    <a style="float: right" id="g_carrito" class="btn btn-info btn-lg" ><span class="glyphicon glyphicon-shopping-cart"  data-toggle="modal" data-target="#carrito"></span></a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table table-responsive table-advance table-hover">
+                    <table id="mytable" class="table table-bordred table-striped">
+                        <thead>
+                        <th id="name">Nombre</th>
+                        <th id="price">Precio</th>
+                        <th id="quantit">Cantidad</th>
+                        <th id="addcar">Agregar al carrito</th>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="producto in listaProductos">
+                            <td >{{producto.nombre_producto}}</td>
+                            <td>{{producto.precio}}</td>
+                            <td> <input id={{producto.nombre_producto}} type="number" name="quantity" min="1" max="15"></td>
+                            <td><button ng-click="agregar_a_carrito(producto.nombre_producto,producto.precio)" ><i  class="large material-icons" >add_shopping_cart</i></button></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade modal-margin" id="carrito" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form class="modal-content"  >
+                <div class="modal-header bagTecBlue">
+                    <h4 class=" whiteText" id="ModalVerDetallesPedido">Detalles del pedido</h4>
+                </div>
+                <div class="modal-body" >
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table table-responsive table-advance table-hover">
+                                    <table id="mytablep" class="table-responsive table-bordred table-striped">
+                                        <thead>
+                                        <th id="nombre_product">Nombre del producto</th>
+                                        <th id="quantity">Cantidad</th>
+                                        <th id="subtotal">Precio c/u</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="producto in carrito">
+                                            <td >{{producto.nombre}}</td>
+                                            <td>{{producto.cantidad}}</td>
+                                            <td>{{producto.precio}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <b>Total:</b>{{total}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
