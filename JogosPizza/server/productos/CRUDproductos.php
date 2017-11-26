@@ -22,6 +22,22 @@ function ObtenertodosProductos(){
     // json_encode se encarga de convertir el array en un json(java script object notation)
     echo json_encode($respuesta);
 }
+function ObtenertodosProductosActivos(){
+    //se importa la conexion con la base de datos
+    include("../conexion.php");
+    $obj = file_get_contents("php://input");
+    $json=json_decode($obj);
+    //se declara el query
+    $query="SELECT * FROM productos WHERE nombre_categoria='$json->nombre_categoria' and estado='1'";
+    //pg_query se encarga de ejecutar el query mediante la conexion y el query y  se encarga de realizar la consulta a la base y generar una tabla
+    $result=pg_query($con,$query)or die("Error de consulta");
+    //se cierra la conexion ya que los datos se guardaron en la variable $result
+    pg_close($con);
+    //pg_fetch_all se encarga de retornar un array con filas y columnas de la tabla que se creo con el query
+    $respuesta=pg_fetch_all($result);
+    // json_encode se encarga de convertir el array en un json(java script object notation)
+    echo json_encode($respuesta);
+}
 function ObtenertodosCategorias(){
     //se importa la conexion con la base de datos
     include("../conexion.php");

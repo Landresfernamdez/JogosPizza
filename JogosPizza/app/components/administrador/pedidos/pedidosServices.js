@@ -1,7 +1,7 @@
 'use strict'
 angular.module('userModule')
     .factory('OperationsPedidos',function($http,$location){
-        var urlp="http://localhost:8080/JogosPizza/server/pedidos/CRUDpedidos.php?Funcion=";
+        var urlp="http://172.24.47.10:8080/JogosPizza/server/pedidos/CRUDpedidos.php?Funcion=";
         var respuesta={
             getPedidos: function(callback){
                 $http.get(
@@ -50,9 +50,8 @@ angular.module('userModule')
                     method  : 'POST',
                     url     : urlp+"updatePedidosR",
                     data    : pedido
-
                 })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
-                    .then(function mySuccess(response) {
+                    .then(function mySuccess(response){
                         if(response.data.status){
                             mostrarNotificacion("Se actualizaron los datos con exito",2);
                             callback({success: true});
@@ -60,7 +59,7 @@ angular.module('userModule')
                         else{
                             mostrarNotificacion("Introduzca los datos de forma correcta",1);
                         }
-                    }, function myError(response) {
+                    },function myError(response) {
                         mostrarNotificacion("Revise su conexion a Internet",1);
                         callback({success: false});
                     });

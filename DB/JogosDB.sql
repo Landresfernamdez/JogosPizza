@@ -133,19 +133,7 @@ END
 $BODY$
 language plpgsql;
 
-CREATE OR REPLACE FUNCTION insertarPedido(
-	nombre_usuario VARCHAR(50),
-	estado CHAR(1),
-	fecha DATE
-	)
-RETURNS VOID AS
-$BODY$
-BEGIN
-	INSERT INTO pedido(nombre_usuario,estado,fecha)VALUES(nombre_usuario,estado,fecha);
 
-END
-$BODY$
-language plpgsql;
 
 CREATE OR REPLACE FUNCTION agregarProducto(
 	nombre_producto VARCHAR(50),
@@ -223,18 +211,6 @@ $BODY$
 language plpgsql;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 CREATE OR REPLACE FUNCTION modificarPedido(
 	id_p VARCHAR(10),
 	estado_p CHAR(1)
@@ -250,8 +226,9 @@ language plpgsql;
 
 SELECT * FROM Pedido
 SELECT * FROM notificacion
+
 SELECT modificarPedidoR('2','n','Disculpe pero no tenemos ingredientes');
-SELECT modificarPedido('2','n');
+SELECT modificarPedido('1','n');
 CREATE OR REPLACE FUNCTION agregarProducto(
 	nombre_pedido VARCHAR(50),
 	precio money,
@@ -274,6 +251,38 @@ $BODY$
 language plpgsql;
 
 
+CREATE OR REPLACE FUNCTION insertarPedido(
+	nombre_usuario VARCHAR(50)
+	)
+RETURNS INT AS
+$BODY$
+	DECLARE id INT;
+BEGIN
+	INSERT INTO pedido(nombre_usuario,estado,fecha)VALUES(nombre_usuario,'n',CURRENT_TIMESTAMP);
+	id=(select max(id_pedido) from pedido);
+	RETURN id;
+END
+$BODY$
+language plpgsql;
+
+CREATE OR REPLACE FUNCTION insertarProductoapedido(
+	nombre_producto_p VARCHAR(50),
+	id_pedido_p VARCHAR(50),
+	cantidad_p VARCHAR(50)
+	)
+RETURNS VOID AS
+$BODY$
+BEGIN
+	INSERT INTO pp(nombre_producto,id_pedido,cantidad)VALUES(nombre_producto_p,CAST(id_pedido_p AS INT),CAST(cantidad_p AS INT));
+END
+$BODY$
+language plpgsql;
+
+SELECT * FROM productos
+SELECT insertarProductoapedido('Pizza suprema grande','1','3')
+SELECT * FROM PP
+SELECT * FROM pedido
+SELECT insertarPedido('landresf12')
 ---Pruebas
 
 SELECT agregarProducto('Pizza Hawaiana mediana','5000',1,'Pizzas medianas');
@@ -306,9 +315,11 @@ SELECT pp.nombre_producto,pp.cantidad,pp.cantidad*p.precio  AS total,p.nombre_ca
 SELECT * FROM PP
 SELECT * FROM pedido
 
+SELECT * FROM productos WHERE nombre_categoria='Pizzas pequeñas' and estado='1'
 
+SELECT * FROM productos
 
-
+SELECT * FROM categorias
 SELECT insertarPedido('landresf12','n','22-11-2017 00:00:00')
 SELECT * FROM pedido where estado='n'
 select insertarCliente('landresf12','Andres','Fernandez','Calderon','Piedades Sur','San Ramon','Alajuela','Residencias TEC San Carlos','12345');

@@ -1,7 +1,7 @@
 'use strict'
 angular.module('userModule')
 .controller('mainController',function($scope,$location,$route,$http){
-    var urlp="http://localhost:8080/JogosPizza/server/usuarios/CRUDusuarios.php?Funcion=";
+    var urlp="http://172.24.47.10:8080/JogosPizza/server/usuarios/CRUDusuarios.php?Funcion=";
     $scope.usuario={
         nombre:"",
         apellido1:"",
@@ -26,9 +26,11 @@ angular.module('userModule')
             .then(function mySuccess(response) {
                 if(response.data.success){
                     if(response.data.tipo=='a'){
+                        sessionStorage.setItem("nombre_usuario",datos_usuario.nombre_usuario)
                         window.location.href = ('app/components/administrador/administrador.html');
                     }
                     else if(response.data.tipo=='c'){
+                        sessionStorage.setItem("nombre_usuario",datos_usuario.nombre_usuario)
                         window.location.href = ('app/components/comprador/comprador.html');
                     }
                     else{

@@ -1,7 +1,8 @@
 'use strict'
 angular.module('userModule')
-    .factory('OperationsProductos',function($http,$location){
+    .factory('OperationscProductos',function($http,$location){
         var urlp="http://172.24.47.10:8080/JogosPizza/server/productos/CRUDproductos.php?Funcion=";
+        var urlpp="http://172.24.47.10:8080/JogosPizza/server/pedidos/CRUDpedidos.php?Funcion=";
         var respuesta={
             getCategorias: function(callback){
             $http.get(
@@ -17,7 +18,7 @@ angular.module('userModule')
           getProductos: function(categoria,callback){
                 $http({
                     method  :'POST',
-                    url     : urlp+"ObtenertodosProductos",
+                    url     : urlp+"ObtenertodosProductosActivos",
                     data    : categoria
 
                 })
@@ -56,7 +57,7 @@ angular.module('userModule')
                 })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
                     .then(function mySuccess(response) {
                         if(response.data.status){
-                            mostrarNotificacion("Se agrego con exito",2);
+                            mostrarNotificacion("Se cambio de estado con exito",2);
                             callback({success: true});
                         }
                         else{
@@ -113,6 +114,40 @@ angular.module('userModule')
                             mostrarNotificacion("Introduzca los datos de forma correcta",1);
                         }
                     }, function myError(response) {
+                        mostrarNotificacion("Revise su conexion a Internet",1);
+                        callback({success: false});
+                    });
+            },
+            addPedido: function(pedido,callback){
+                $http({
+                    method  : 'POST',
+                    url     : urlpp+"putPedido",
+                    data    : pedido
+
+                })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
+                    .then(function mySuccess(response) {
+                        console.log(response);
+                        callback({success:true,data:response})
+                    }, function myError(response) {
+                        mostrarNotificacion("Revise su conexion a Internet",1);
+                        callback({success: false});
+                    });
+            },
+            addproductoPedido:function(pp,callback){
+                $http({
+                    method  : 'POST',
+                    url     : urlpp+"putPP",
+                    data    : pp
+                })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
+                    .then(function mySuccess(response) {
+                        if(response.data.status){
+                            console.log("exito");
+                            callback({success: true});
+                        }
+                        else{
+                            console.log("error");
+                        }
+                    },function myError(response){
                         mostrarNotificacion("Revise su conexion a Internet",1);
                         callback({success: false});
                     });

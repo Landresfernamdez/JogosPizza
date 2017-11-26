@@ -18,7 +18,8 @@ angular.module('userModule')
     };
     $scope.getCategorias();
     $scope.getProductos= function getProductos(){
-        OperationsProductos.getProductos({nombre_categoria:selectedOption.text},function(res){
+        var categoria=localStorage.getItem("categoria");
+        OperationsProductos.getProductos({nombre_categoria:categoria},function(res){
             $scope.listaProductos = res;
         });
     };
@@ -27,6 +28,7 @@ angular.module('userModule')
     select.addEventListener('change',
         function(){
             selectedOption = this.options[select.selectedIndex];
+            localStorage.setItem("categoria",selectedOption.text);
             $scope.getProductos();
         });
     $scope.actualizarProducto=function (producto) {
@@ -39,8 +41,10 @@ angular.module('userModule')
         else if(producto.estado==='0'){
             producto.estado='1';
         }
+        console.log(producto);
         OperationsProductos.updateProductos(producto, function(response) {
             if (response.success){
+                location.reload();
             }
         });
     };
@@ -49,6 +53,7 @@ angular.module('userModule')
     select1.addEventListener('change',
         function(){
             selectedOption1 = this.options[select1.selectedIndex];
+            localStorage.setItem("categoria",selectedOption1.text);
         });
     $scope.modificarProducto = function modificarProducto(producto){
         alert(selectedOption1.text);
