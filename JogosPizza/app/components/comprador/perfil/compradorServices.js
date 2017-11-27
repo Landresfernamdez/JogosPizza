@@ -34,6 +34,7 @@ angular.module('userModule')
                         }
                         else{
                             mostrarNotificacion("Error en la modificacion",1);
+                            console.log(response);
                             callback({success: false});
                         }
                     },function myError(response){

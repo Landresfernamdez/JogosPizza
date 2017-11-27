@@ -35,6 +35,8 @@ angular.module('userModule')
                }
             });
             console.log($scope.carrito);
+            $location.path('productosc');
+            $route.reload();
             mostrarNotificacion("Su pedido se ha enviado con exito",2);
         }
         else{

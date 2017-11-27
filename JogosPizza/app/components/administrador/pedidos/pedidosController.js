@@ -47,6 +47,8 @@ angular.module('userModule')
         if(estado===1){
             OperationsPedidos.aceptaPedido({estado:estado.toString(),id_pedido:$scope.pedido.id_pedido}, function(res){
                 if (res.success) {
+                    $location.path('pedidos')
+                    $route.reload();
                 }
             });
         }else{
@@ -57,6 +59,8 @@ angular.module('userModule')
                     console.log({estado:estado,id_pedido:$scope.pedido.id_pedido,detalle:text});
                     OperationsPedidos.rechazaPedido({estado:estado,id_pedido:$scope.pedido.id_pedido,detalle:text}, function(res){
                         if (res.success) {
+                            $location.path('pedidos')
+                            $route.reload();
                         }
                     });}
                 , function() { alertify.error('Cancel') });

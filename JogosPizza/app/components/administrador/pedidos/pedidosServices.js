@@ -34,11 +34,11 @@ angular.module('userModule')
                 })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
                     .then(function mySuccess(response) {
                         if(response.data.status){
-                            mostrarNotificacion("Se actualizaron los datos con exito",2);
+                            mostrarNotificacion("Se acepto con exito",2);
                             callback({success: true});
                         }
                         else{
-                            mostrarNotificacion("Introduzca los datos de forma correcta",1);
+                            mostrarNotificacion("Error en el sistema",1);
                         }
                     }, function myError(response) {
                         mostrarNotificacion("Revise su conexion a Internet",1);
@@ -53,11 +53,11 @@ angular.module('userModule')
                 })// si la insercion fue exitosa entra al succes de lo contrario retorna un error departe del servidor
                     .then(function mySuccess(response){
                         if(response.data.status){
-                            mostrarNotificacion("Se actualizaron los datos con exito",2);
+                            mostrarNotificacion("Se rechazo el pedido con exito",2);
                             callback({success: true});
                         }
                         else{
-                            mostrarNotificacion("Introduzca los datos de forma correcta",1);
+                            mostrarNotificacion("Error en el sistema",1);
                         }
                     },function myError(response) {
                         mostrarNotificacion("Revise su conexion a Internet",1);

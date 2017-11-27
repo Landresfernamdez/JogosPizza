@@ -80,7 +80,6 @@ function putUsuarios(){
     }
     echo json_encode($response, JSON_FORCE_OBJECT);
 }
-
 function getDataUser(){
     include("../conexion.php");
     $obj = json_decode(file_get_contents("php://input"));

@@ -32,7 +32,7 @@ angular.module('userModule')
         $scope.usuario.provincia = usuario.provincia;
         $scope.usuario.detalle = usuario.detalle;
         $scope.usuario.contrasena = usuario.contrasena;
-        OperationsComprador.modificarUsuario($scope.usuario, function (response) {
+        OperationsComprador.modificarUsuario($scope.usuario,function (response) {
             if (response.success) {
             }
         });
